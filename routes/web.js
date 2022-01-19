@@ -1,11 +1,10 @@
 const express = require('express');
 const { route } = require('express/lib/application');
+const controller = require('../controllers/web/controler');
 
 const router = express.Router();
 
-router.get('/', function(req, res) {
-    res.send('hello user');
-})
+router.get('/', controller.getIndex);
 
 router.get('/nguyenquangdat', function(req, res) {
     res.send('hello nguyen quang dat');
