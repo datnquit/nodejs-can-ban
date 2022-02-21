@@ -1,4 +1,4 @@
 
 module.exports.getIndex = (req, res) => {
-    res.send('hello user');
+    res.render('index');
 }

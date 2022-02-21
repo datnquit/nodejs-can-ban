@@ -3,11 +3,18 @@ const app = express();
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const fsExtra = require('fs-extra');
+const expressLayouts = require('express-ejs-layouts');
+ 
 require('dotenv').config();
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressLayouts);
 
 app.use(require('./routes/router').router);
+
+app.set('view engine', 'ejs')
+app.set('views', 'views');
+app.set('layout', './master');
 
 // SET STORAGE
 var storage = multer.diskStorage({
