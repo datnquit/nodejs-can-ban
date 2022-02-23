@@ -10,11 +10,26 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressLayouts);
 
-app.use(require('./routes/router').router);
+app.use((req, res, next) => {
+    res.locals.xmenu = [
+        {
+            label: 'home',
+            link: '/'
+        },
+        {
+            label: 'datnq',
+            link: 'https://nqdat.com'
+        }
+    ];
+    next();
+});
+
 
 app.set('view engine', 'ejs')
 app.set('views', 'views');
 app.set('layout', './master');
+
+app.use(require('./routes/router').router);
 
 // SET STORAGE
 var storage = multer.diskStorage({
@@ -66,6 +81,23 @@ app.post('/uploadmultiple', upload.array('myFiles', 12), (req, res, next) => {
     }
     res.send(files)
 })
+
+app.get('/test', function(req, res) {
+    res.render('index', {
+        name: 'Quang Dat',
+        age: 23,
+        // xmenu: [
+        //     {
+        //         label: 'home',
+        //         link: '/'
+        //     },
+        //     {
+        //         label: 'datnq',
+        //         link: 'https://nqdat.com'
+        //     }
+        // ]
+    });
+});
     
 
 app.listen(process.env.PORT, function() {
