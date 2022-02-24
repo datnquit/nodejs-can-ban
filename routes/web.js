@@ -1,6 +1,26 @@
 module.exports = app => {
     var router = require("express").Router();
     const controller = require("../controllers/web/controler");
+    const multer = require("multer");
+    const fsExtra = require('fs-extra');
+
+    // SET STORAGE
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            let path = 'uploads';
+            if (!fsExtra.existsSync(path)) {
+                fsExtra.mkdirSync(path)
+            }
+
+            cb(null, path)
+        },
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + '-' + file.originalname)
+        }
+    });
+
+    var upload = multer({ storage: storage })
+
     router.get('/', controller.getIndex);
 
     router.get('/nguyenquangdat', function(req, res) {
@@ -35,6 +55,13 @@ module.exports = app => {
         // res.redirect('/');
         // res.render('');
     });
+
+    router.get('/form/data', controller.showForm);
+
+    router.post('/uploadfile', upload.single('myFile'), controller.uploadFile)
+
+    router.post('/uploadmultiple', upload.array('myFiles'), controller.uploadMultiple)
+    
 
     app.use( router);
 }
