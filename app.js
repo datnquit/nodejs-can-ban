@@ -9,6 +9,8 @@ require('dotenv').config();
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressLayouts);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     res.locals.xmenu = [

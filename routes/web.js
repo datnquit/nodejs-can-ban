@@ -1,5 +1,4 @@
 const express = require('express');
-const { route } = require('express/lib/application');
 const controller = require('../controllers/web/controler');
 
 const router = express.Router();
@@ -33,4 +32,5 @@ function func2(req, res, next) {
 function helloWorld(req, res) {
     res.send('helloworld');
 }
+
 module.exports.routerWeb = router;
