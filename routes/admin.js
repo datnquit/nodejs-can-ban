@@ -1,9 +1,7 @@
-const express = require('express');
-
-const routerAdmin = express.Router();
-
-routerAdmin.get('/', function(req, res) {
-    res.send('hello admin');
-})
-
-module.exports.routerAdmin = routerAdmin;
+module.exports = app => {
+    var router = require("express").Router();
+    router.get('/', function(req, res) {
+        res.send('hello admin');
+    })
+    app.use('/admin', router);
+}

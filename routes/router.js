@@ -1,8 +1,7 @@
-const express = require('express');
+module.exports = app => {
+    require("./admin")(app);
+    require("./web")(app);
+}
 
-const router = express();
-
-router.use('/admin', require('./admin').routerAdmin);
-router.use(require('./web').routerWeb);
-
-module.exports.router = router;
+// router.use('/admin', require('./admin').routerAdmin);
+// router.use(require('./web').routerWeb);
