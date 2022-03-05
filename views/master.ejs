@@ -7,8 +7,8 @@
     <title>Index</title>
 </head>
 <body>
-    <%- include('./partials/header.ejs') %>
+    <%- include('./partials/header.ejs', {headerMenu: masterMenu.headerMenu}) %>
     <%- body %>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/footer.ejs', {footerMenu: masterMenu.footerMenu}) %>
 </body>
 </html>

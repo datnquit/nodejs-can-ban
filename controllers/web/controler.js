@@ -1,6 +1,11 @@
 
 exports.getIndex = (req, res) => {
-    res.render('index.ejs');
+  console.log(res.locals.masterMenu);
+  res.render('index.ejs', {
+    name: 'Nguyen quang Dat',
+    age: 23,
+  
+  });
 }
 
 exports.showForm = (req, res) => {

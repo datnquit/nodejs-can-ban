@@ -12,6 +12,36 @@ app.set('view engine', 'ejs');
 app.set('views', 'views')
 app.set('layout', './master')
 
+app.use((req, res, next) => {
+    res.locals.masterMenu = {
+        headerMenu: [
+          {
+            label: 'home',
+            link: '/',
+          },
+          {
+            label: 'datnq',
+            link: 'https://nqdat.com'
+          },
+          {
+            label: 'newnet',
+            link: 'https://newnet.vn',
+          },
+        ],
+        footerMenu: [
+          {
+            label: 'home',
+            link: '/',
+          },
+          {
+            label: 'datnq',
+            link: 'https://nqdat.com'
+          },
+        ]
+    };
+    next();
+})
+
 
 require("./routes/router")(app);
 
